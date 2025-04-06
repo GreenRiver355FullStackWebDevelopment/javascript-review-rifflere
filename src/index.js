@@ -26,15 +26,17 @@ const reviews = [
 
 window.onload = () => {
   // check that onload is properly set up
-  console.log("LOADED!")
+  // console.log("LOADED!")
 
   reviews.forEach(eachReview => renderReview(eachReview))
+
+  document.querySelector("button").onclick = addReview;
 }
 
 function renderReview(review) {
   const reviewSection = document.querySelector(".reviews");
   // Console log to check that the elements are properly referenced
-  // console.log(review);
+  console.log(review);
 
   // Create elements
   const div = document.createElement("div");
@@ -64,6 +66,40 @@ function renderReview(review) {
   
   // append review div to the reviewSection in the DOM
   reviewSection.appendChild(div);
+}
+
+function addReview(event) {
+  // check function works
+  console.log("Clicked!");
+
+  // prevent default form behavior
+  event.preventDefault();
+
+  // get data from form
+  const username = document.querySelector("#username").value;
+  const image = document.querySelector("#image").value;
+  const star = document.querySelector("#star").value;
+  const review = document.querySelector("#review").value;
+
+  console.log(username);
+  console.log(image);
+  console.log(star);
+  console.log(review);
+
+
+  // create review object
+  const newReview = {
+    username,
+    image,
+    star,
+    review
+  }
+
+  // Check that review object is created correctly
+  console.log(newReview);
+  
+  // render new review
+  renderReview(newReview);
 }
 
 
