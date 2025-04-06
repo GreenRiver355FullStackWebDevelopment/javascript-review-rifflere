@@ -1,3 +1,5 @@
+import { calculateStarAverage } from './logic.js';
+
 //Do not change //////////////////////////////////
 const reviews = [
   {
@@ -29,6 +31,11 @@ window.onload = () => {
   // console.log("LOADED!")
 
   reviews.forEach(eachReview => renderReview(eachReview))
+
+  // Display average rating
+  const starRating = document.querySelector(".starRating");
+  const ratingAverage = calculateStarAverage(reviews)
+  starRating.innerHTML += ratingAverage;
 
   document.querySelector("button").onclick = addReview;
 }
@@ -78,7 +85,8 @@ function addReview(event) {
   // get data from form
   const username = document.querySelector("#username").value;
   const image = document.querySelector("#image").value;
-  const star = document.querySelector("#star").value;
+  // (Looked up how to convert String to Number to make math work: https://stackoverflow.com/questions/1133770/how-to-convert-a-string-to-an-integer-in-javascript)
+  const star = Number(document.querySelector("#star").value);
   const review = document.querySelector("#review").value;
 
   console.log(username);
@@ -97,9 +105,18 @@ function addReview(event) {
 
   // Check that review object is created correctly
   console.log(newReview);
+
+  // Add newReview to array of reviews
+  reviews.push(newReview);
+  console.log(reviews);
   
   // render new review
   renderReview(newReview);
+
+  // Update average rating
+  const starRating = document.querySelector(".starRating");
+  const ratingAverage = calculateStarAverage(reviews)
+  starRating.innerHTML = `Star Rating: ${ratingAverage}`;
 }
 
 
