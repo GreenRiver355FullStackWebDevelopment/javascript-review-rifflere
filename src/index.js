@@ -25,38 +25,44 @@ const reviews = [
 //Your Code Below Here////
 
 window.onload = () => {
+  // check that onload is properly set up
   console.log("LOADED!")
 
-  renderReviews();
+  reviews.forEach(eachReview => renderReview(eachReview))
 }
 
-function renderReviews() {
+function renderReview(review) {
   const reviewSection = document.querySelector(".reviews");
+  // Console log to check that the elements are properly referenced
+  // console.log(review);
 
-  const h1 = document.createElement("h1");
-
-  reviewSection.appendChild(h1);
-
+  // Create elements
   const div = document.createElement("div");
   const image = document.createElement("img");
   const innerDiv = document.createElement("div");
   const username = document.createElement("p");
   const rating = document.createElement("p");
-  const review = document.createElement("p");
+  const reviewContent = document.createElement("p");
 
+  // Set classname for CSS
   div.className = "review_container";
-  image.src = "./images/avatar2.png";
-  username.textContent = "USERNAME";
-  rating.textContent = "RATING";
-  review.textContent = "REVIEW";
 
+  // Assign information from review object
+  image.src = review.image;
+  username.textContent = review.username;
+  rating.textContent = review.star;
+  reviewContent.textContent = review.review;
+
+  // append text to innerDiv
   innerDiv.appendChild(username);
   innerDiv.appendChild(rating);
-  innerDiv.appendChild(review);
+  innerDiv.appendChild(reviewContent);
 
+  // append image and innerDiv to main div
   div.appendChild(image);
   div.appendChild(innerDiv);
   
+  // append review div to the reviewSection in the DOM
   reviewSection.appendChild(div);
 }
 
